@@ -39,8 +39,17 @@ WORKDIR $HOME
 USER $USER
 
 RUN mkdir $HOME/repo \
-	&& mkdir $HOME/.config \
-	&& mkdir -p $HOME/.local/bin
+    && mkdir $HOME/.config \
+    && mkdir -p $HOME/.local/bin \
+    && mkdir $HOME/bash_history
+
+ENV HISTFILE=$HOME/bash_history/.bash_history \
+    HISTTIMEFORMAT='%F %T - ' \
+    TZ="Australia/Brisbane"
+
+# Touch the ~/.bash_history file, otherwise docker will create it as a directory
+#RUN touch $HOME/.bash_history \
+#    && chmod 600 $HOME/.bash_history
 
 # Install the latest stable noevim release
 # Note that I don't really know if this is necessary anymore
