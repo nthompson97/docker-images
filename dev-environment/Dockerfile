@@ -61,4 +61,9 @@ RUN wget https://github.com/neovim/neovim/releases/download/v$NVIM_VERSION/nvim-
 
 ENV PATH=$PATH:$HOME/.local/bin
 
+# Install our copy of the nvim kickstart config
+# https://github.com/nvim-lua/kickstart.nvim
+RUN mkdir $HOME/.config/nvim
+ADD --chown=$USER:$USER nvim $HOME/.config/nvim
+
 CMD ["sleep", "infinity"]

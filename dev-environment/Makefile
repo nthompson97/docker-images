@@ -23,10 +23,10 @@ up:
 		--hostname $(CONTAINER_NAME) \
 		--userns keep-id \
 		--volume $(CONTAINER_NAME)-bash-history:/home/ubuntu/bash_history \
-		--volume ./nvim:/home/ubuntu/.config/nvim:z \
 		--volume ./:/home/ubuntu/repo/:z \
 		--workdir /home/ubuntu/repo \
 		$(IMAGE_NAME):latest
+
 
 # Stop and remove a named container
 .PHONY: down
