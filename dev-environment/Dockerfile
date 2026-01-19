@@ -17,6 +17,7 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean \
 	libssl-dev \
 	make \
         pkg-config \
+	python3-venv \
 	sudo \
         tree \
         unzip \
@@ -34,6 +35,9 @@ ENV HOME="/home/$USER" \
     GROUP=$GROUP \
     UID=$UID \
     GID=$GID
+
+# Enable passwordless sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 WORKDIR $HOME
 USER $USER
@@ -64,6 +68,6 @@ ENV PATH=$PATH:$HOME/.local/bin
 # Install our copy of the nvim kickstart config
 # https://github.com/nvim-lua/kickstart.nvim
 RUN mkdir $HOME/.config/nvim
-RUN git clone https://github.com/nthompson97/kickstart.nvim.git $HOME/.config/nvim
+RUN git clone --branch master --depth=1 https://github.com/nthompson97/kickstart.nvim.git $HOME/.config/nvim
 
 CMD ["sleep", "infinity"]
