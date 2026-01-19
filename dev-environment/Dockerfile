@@ -14,6 +14,7 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean \
 	gcc \
 	g++ \
 	git \
+	htop \
 	libssl-dev \
 	make \
         pkg-config \
