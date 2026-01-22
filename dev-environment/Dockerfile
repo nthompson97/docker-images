@@ -20,7 +20,8 @@ RUN rm -f /etc/apt/apt.conf.d/docker-clean \
         pkg-config \
 	python3-venv \
 	sudo \
-        tree \
+	tmux \
+	tree \
         unzip \
         vim \
         wget
@@ -80,5 +81,8 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | b
 
 # Install Claude Code CLI
 RUN . "$NVM_DIR/nvm.sh" && npm install -g @anthropic-ai/claude-code
+
+# Copy tmux configuration
+COPY --chown=$USER:$GROUP .tmux.conf $HOME/.tmux.conf
 
 CMD ["sleep", "infinity"]
