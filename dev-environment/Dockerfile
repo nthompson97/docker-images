@@ -71,4 +71,14 @@ ENV PATH=$PATH:$HOME/.local/bin
 RUN mkdir $HOME/.config/nvim
 RUN git clone --branch master --depth=1 https://github.com/nthompson97/kickstart.nvim.git $HOME/.config/nvim
 
+# Install Node.js (required for Claude Code CLI)
+ENV NVM_DIR="$HOME/.nvm"
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
+    && . "$NVM_DIR/nvm.sh" \
+    && nvm install --lts \
+    && nvm use --lts
+
+# Install Claude Code CLI
+RUN . "$NVM_DIR/nvm.sh" && npm install -g @anthropic-ai/claude-code
+
 CMD ["sleep", "infinity"]
