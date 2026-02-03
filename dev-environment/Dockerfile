@@ -69,8 +69,10 @@ ENV PATH=$PATH:$HOME/.local/bin
 
 # Install our copy of the nvim kickstart config
 # https://github.com/nvim-lua/kickstart.nvim
-RUN mkdir $HOME/.config/nvim
-RUN git clone --branch master --depth=1 https://github.com/nthompson97/kickstart.nvim.git $HOME/.config/nvim
+# ADD fetches latest commit info; cache invalidates only when repo changes
+ADD https://api.github.com/repos/nthompson97/kickstart.nvim/commits/master /tmp/kickstart-version.json
+RUN mkdir $HOME/.config/nvim \
+    && git clone --branch master --depth=1 https://github.com/nthompson97/kickstart.nvim.git $HOME/.config/nvim
 
 # Install Node.js (required for Claude Code CLI)
 ENV NVM_DIR="$HOME/.nvm"

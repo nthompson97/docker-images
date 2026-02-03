@@ -17,7 +17,7 @@ build:
 .PHONY: up
 up:
 	@if ! podman volume exists $(NAME)-bash-history 2>/dev/null; then \
-		podman volume create $(AME)-bash-history; \
+		podman volume create $(NAME)-bash-history; \
 	fi
 
 	podman pod create \
